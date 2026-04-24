@@ -1,12 +1,23 @@
 class Solution {
-    //Tharunika
     public int[] sortedSquares(int[] nums) {
-        for(int i=0;i<nums.length;i++){
-            nums[i] = nums[i]*nums[i];
-        }
+        int[] res = new int[nums.length];
+        int left =0;
+        int right = nums.length-1;
+        int pos = nums.length-1;
+        while(left<=right){
+            int sq1 = nums[left] * nums[left];
+            int sq2 = nums[right] * nums[right];
 
-        Arrays.sort(nums);
-        return nums;
-        
-    }
+            if (sq1>sq2) {
+                res[pos] = sq1;
+                left++;
+            }
+            else{
+                res[pos]=sq2;
+                right--;
+            }
+                pos--;  
+        }
+       return res;
+}
 }
