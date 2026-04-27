@@ -7,7 +7,7 @@ class Solution {
             if(prices[i] < mincost){
                 mincost = prices[i];
             }
-            else if(temp_profit> profit){
+            if(temp_profit> profit){
                 profit = temp_profit;
             }
             
