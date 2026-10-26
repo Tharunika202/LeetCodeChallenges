@@ -5,8 +5,6 @@ class Solution {
         for (int num : nums) {
             count[num + offSet]++;
         }
-
-        // Step 2: buckets, where index = frequency
         List<List<Integer>> buckets = new ArrayList<>();
         for (int i = 0; i <= nums.length; i++) {
             buckets.add(new ArrayList<>());
@@ -16,8 +14,6 @@ class Solution {
                 buckets.get(count[i]).add(i - offSet);
             }
         }
-
-        // Step 3: collect from the highest frequency down
         int[] result = new int[k];
         int idx = 0;
         for (int freq = nums.length; freq >= 1; freq--) {
