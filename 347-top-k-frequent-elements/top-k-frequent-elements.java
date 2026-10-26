@@ -13,7 +13,6 @@ class Solution {
         for(int i=0;i<k;i++){
           arr[i] = list.get(i).getKey();
         }
-        Arrays.sort(arr);
         return arr;
         
     }
