@@ -8,13 +8,13 @@ class Solution {
 
         HashMap<Integer, Integer> hashMap= new HashMap<>();
       for(int i = 0; i < nums.length; i++){
-        hashMap.merge(nums[i], 1, Integer::sum);
-      }
-      for(Integer i : hashMap.values()){
-        if(i>1){
+        if(hashMap.containsKey(nums[i])){
           return true;
+        }
+        else {
+          hashMap.put(nums[i], 1);
         }
       }
       return false;
-    }
+      }
 }
