@@ -1,19 +1,33 @@
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
-
-
-        HashMap<Integer, Integer> hashMap =  new HashMap<>();
-        for(int i=0;i<nums.length;i++){
-            hashMap.merge(nums[i], 1, Integer::sum);
+        int offSet = 10000;
+        int[] count = new int[20001];
+        for (int num : nums) {
+            count[num + offSet]++;
         }
-        List<Map.Entry<Integer, Integer>> list = new ArrayList<>(hashMap.entrySet());
-        list.sort(Map.Entry.<Integer, Integer>comparingByValue().reversed() );
-      System.out.println(list);
-        int[] arr = new int[k];
-        for(int i=0;i<k;i++){
-          arr[i] = list.get(i).getKey();
+
+        // Step 2: buckets, where index = frequency
+        List<List<Integer>> buckets = new ArrayList<>();
+        for (int i = 0; i <= nums.length; i++) {
+            buckets.add(new ArrayList<>());
         }
-        return arr;
-        
+        for (int i = 0; i < count.length; i++) {
+            if (count[i] > 0) {
+                buckets.get(count[i]).add(i - offSet);
+            }
+        }
+
+        // Step 3: collect from the highest frequency down
+        int[] result = new int[k];
+        int idx = 0;
+        for (int freq = nums.length; freq >= 1; freq--) {
+            for (int number : buckets.get(freq)) {
+                result[idx++] = number;
+                if (idx == k) {
+                    return result;
+                }
+            }
+        }
+        return result;
     }
 }
